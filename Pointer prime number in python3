@@ -1,0 +1,80 @@
+#Given a number N, the task is to check if N is a Pointer-Prime Number or not. If N is a Pointer-Prime Number then print “Yes” else print “No”.
+# Python3 implementation for the above approach
+def digProduct(n):
+     
+    product = 1
+     
+    while(n != 0):
+        product = product * (n % 10)
+        n = int(n / 10)
+         
+    return product
+ 
+# Function that returns true if n
+# is prime else returns false
+def isPrime(n):
+ 
+    # Corner cases
+    if (n <= 1):
+        return False
+    if (n <= 3):
+        return True
+ 
+    # This is checked so that we can skip
+    # middle five numbers in below loop
+    if (n % 2 == 0 or n % 3 == 0):
+        return False
+ 
+    i = 5
+    while(i * i <= n):
+        if (n % i == 0 or n % (i + 2) == 0):
+            return False
+             
+        i = i + 6
+ 
+    return True
+ 
+# Function to return the smallest prime
+# number greater than N
+def nextPrime(N):
+     
+    # Base case
+    if(N <= 1):
+        return 2;
+         
+    prime = N
+    found = False
+     
+    # Loop continuously until isPrime
+    # returns true for a number greater
+    # than n
+    while(not found):
+        prime = prime + 1
+         
+        if(isPrime(prime)):
+            found = True
+ 
+    return prime
+ 
+# Function to check Pointer-Prime numbers
+def isPointerPrime(n):
+     
+    if(isPrime(n) and
+      (n + digProduct(n) == nextPrime(n))):
+        return True
+    else:
+        return False
+ 
+# Driver Code
+if __name__=="__main__":
+     
+    # Given number N
+    N = 23
+     
+    # Function call
+    if(isPointerPrime(N)):
+        print("Yes")
+    else:
+        print("No")
+ 
+# This code is contributed by renuka deshpande 
